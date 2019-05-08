@@ -1,0 +1,148 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site2.master.cs" Inherits="Enstruman_Satis.Site2" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="sitiller/Anasayfa.css" />
+    <asp:ContentPlaceHolder id="head" runat="server">
+
+    </asp:ContentPlaceHolder>
+    <style type ="text/css">
+
+  .enust
+    {
+        background-color:white;
+        float:left;
+        margin-bottom:5px;
+    }
+
+
+    .MainBox
+    {
+        width: 1000px;
+        text-align:left;
+        background-color : white;
+        float:left;
+        margin-left:183px;
+        padding-bottom : 5px;
+        padding-right: 5px;
+        padding-top :5px;
+    }
+
+    .logo
+    {
+        width:1000px;
+        height:299px;
+        background-color:white;
+        float:left;
+        margin-bottom:5px;
+        padding-top:5px;
+ 
+    }
+      .MenuBox
+    {
+        width:1000px;
+        height:40px;
+        background-color:white;
+        float:left;
+    }
+    .LeftBox
+    {
+        width : 200px;
+        min-height:480px;
+        background-color:#E4E4E4;
+        float:left;
+        margin-right:5px;
+
+    }
+
+    .ContentBox
+    {
+        width: 795px;
+        min-height:540px;
+        background-color:white;
+        float:left;
+
+
+    }
+
+    .BottomBox
+    {
+        margin-top:5px;
+        width: 1000px;
+        height:30px;
+        background-color:#A20319;
+        float:left;
+        color : white;
+        text-align:center;
+    }
+
+
+
+        </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+
+     
+          
+            <div class="enust">  
+  <div class="ustmenu2">
+<ul>
+    <li><asp:Label ID="Label1" runat="server" Text="Label" Font-Bold="True" ForeColor="White" Font-Underline="true"></asp:Label></li>
+<li><a href="Profil.aspx">Profil
+    </a></li>
+<li><a href="Anasayfa.aspx">Çıkış Yap</a></li>
+</ul>
+</div>  
+               </div>
+           <div class="MainBox">
+
+    <div class="logo">
+<img src="resimler/banner.png" />
+    </div>
+
+       <div class="MenuBox">  
+             
+  
+ <div class="menu">
+<ul>
+<li><a href="Anasayfa2.aspx">Anasayfa</a></li>
+<li><a href="Hakkimizda2.aspx">Hakkımızda</a></li>
+<li><a href="İletisim.aspx">İletişim</a></li>
+</ul>
+</div>
+       </div>
+     <div class="LeftBox"> 
+         
+         <ul id="kategoribaslik">KATEGORİLER</ul>
+
+         <ul id="kategori">
+             
+                 <asp:Repeater ID="Repeater1" runat="server">
+                   <ItemTemplate>
+                         <li><asp:LinkButton ID="LinkButton1" runat="server" Text='<%# Eval ("KategoriAdi") %>' OnClick="LinkButton1_Click" ></asp:LinkButton></li>
+                       
+                   </ItemTemplate>
+         </asp:Repeater>
+</ul>
+              
+               </div>
+     <div class="ContentBox">
+             <asp:ContentPlaceHolder id="OrtakAlan" runat="server">
+            
+    </asp:ContentPlaceHolder>
+
+     </div>
+     <div class="BottomBox"> Her Hakkı Saklıdır © 2016 enstrumansatis.com.tr ®  </div>
+     <div style ="clear : both">
+
+   </div>
+    </div>
+     
+ 
+    </form>
+    
+</body>
+</html>
