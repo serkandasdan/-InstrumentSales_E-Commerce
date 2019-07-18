@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "ProductDetails";
+}
+
+@using EnstrumanSatis_MVC_Project.Models
+
+@model Product
+
+<div class=" single_top">
+
+
+    <div class="single_grid">
+
+        <div class="grid images_3_of_2">
+            <ul id="etalage">
+                <li>
+                    <a href="optionallink.html">
+                        <img class="etalage_thumb_image" src="~/Content/Resimler/@Model.Category.CategoryName/@Model.Image1" class="img-responsive" />
+                        <img class="etalage_source_image" src="~/Content/Resimler/@Model.Category.CategoryName/@Model.Image1" class="img-responsive" title="" />
+                    </a>
+                </li>
+                <li>
+                    <img class="etalage_thumb_image" src="~/Content/Resimler/@Model.Category.CategoryName/@Model.Image1" class="img-responsive" />
+                    <img class="etalage_source_image" src="~/Content/Resimler/@Model.Category.CategoryName/@Model.Image1" class="img-responsive" title="" />
+                </li>
+                <li>
+                    <img class="etalage_thumb_image" src="~/Content/Resimler/@Model.Category.CategoryName/@Model.Image2" class="img-responsive" />
+                    <img class="etalage_source_image" src="~/Content/Resimler/@Model.Category.CategoryName/@Model.Image2" class="img-responsive" />
+                </li>
+                <li>
+                    <img class="etalage_thumb_image" src="~/Content/Resimler/@Model.Category.CategoryName/@Model.Image3" class="img-responsive" />
+                    <img class="etalage_source_image" src="~/Content/Resimler/@Model.Category.CategoryName/@Model.Image3" class="img-responsive" />
+                </li>
+            </ul>
+            <div class="clearfix"> </div>
+        </div>
+
+        <div class="desc1 span_3_of_2">
+
+
+            <h4>@Model.ProductName</h4>
+            <div class="cart-b">
+                <div class="left-n ">@string.Format("{0:C}", Model.Price)</div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a class="now-get get-cart-in" href="/Cart/ProductBuy">Hemen Al</a>
+                }
+                else
+                {
+                    <a class="now-get get-cart-in" href="/User/Login">Hemen Al</a>
+                }
+
+
+                <a class="now-get get-cart-in" href="#">Sepete Ekle</a>
+
+
+
+
+                <div class="clearfix"></div>
+            </div>
+
+            <div>
+                @if (Model.Stock > 0)
+                {
+                    <h6 class="alert alert-success"> Stokta Var </h6>
+                }
+                else
+                {
+                    <h6 class="alert alert-danger"> Stokta Yok </h6>
+                }
+                <div class="clearfix"></div>
+            </div>
+
+            <p>
+
+                <h6>Ürün Açıklaması</h6>
+                @Model.Description
+            </p>
+            <div class="share">
+                <h5>Ürünü Paylaş :</h5>
+                <ul class="share_nav">
+                    <li><a href="#"><img src="~/Content/images/facebook.png" title="facebook"></a></li>
+                    <li><a href="#"><img src="~/Content/images/twitter.png" title="Twiiter"></a></li>
+                    <li><a href="#"><img src="~/Content/images/rss.png" title="Rss"></a></li>
+                    <li><a href="#"><img src="~/Content/images/gpluse.png" title="Google+"></a></li>
+                </ul>
+            </div>
+
+
+        </div>
+        <div class="clearfix"> </div>
+
+        <br />
+        <br />
+
+        <br />
+
+        <div class="panel panel-default">
+
+            
+
+            <div class="panel-heading"><b>Yorumlar</b></div>
+            @foreach (Comment comment in ViewBag.CommentList) { 
+        <div class="panel-body">
+
+            <h5><b>@comment.User_.UserName </b><span class="pull-right"> <b>@comment.CreateDate</b></span></h5>
+
+            @if (ViewBag.CommentList == null)
+            {
+                <p>Henüz yorum yapılmamış</p>
+            }
+
+
+            <p>
+                @comment.Comment1
+            </p>
+            <hr style="height:1px; background-color:lightgray;" />
+        </div>
+           
+            }
+
+            @if (User.Identity.IsAuthenticated)
+            {
+             
+
+                
+        <form action="/Product/AddComment" method="post" role="form">
+
+            <input type="hidden" value="@Model.ID" name="ProductID" />
+            <input type="hidden" value="@User.Identity.Name" name="UserName" />
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="comment">Yorumunuz:</label>
+                    <textarea class="form-control" rows="5" id="comment" name="Comment1"></textarea>
+                </div>
+                <button type="submit" class="btn btn-info pull-right">
+                    <span class="glyphicon glyphicon-send" aria-hidden="true"></span> Gönder
+                </button>
+
+            </div>
+        </form>
+        
+            }
+
+        </div>
+
+
+    </div>
+
+</div>
+
+@section head{
+    <link href="~/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="~/Content/css/etalage.css" type="text/css" media="all" />
+
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+
+
+    <script src="~/Content/js/jquery.etalage.min.js"></script>
+    <script>
+        jQuery(document).ready(function ($) {
+
+            $('#etalage').etalage({
+                thumb_image_width: 300,
+                thumb_image_height: 300,
+                source_image_width: 1000,
+                source_image_height: 1000,
+                show_hint: true,
+                click_callback: function (image_anchor, instance_id) {
+                    alert('Callback example:\nYou clicked on an image with the anchor: "' + image_anchor + '"\n(in Etalage instance: "' + instance_id + '")');
+                }
+            });
+
+        });
+    </script>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var menu_ul = $('.menu > li > ul'),
+                menu_a = $('.menu > li > a');
+            menu_ul.hide();
+            menu_a.click(function (e) {
+                e.preventDefault();
+                if (!$(this).hasClass('active')) {
+                    menu_a.removeClass('active');
+                    menu_ul.filter(':visible').slideUp('normal');
+                    $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                } else {
+                    $(this).removeClass('active');
+                    $(this).next().stop(true, true).slideUp('normal');
+                }
+            });
+
+        });
+    </script>
+}
+
+

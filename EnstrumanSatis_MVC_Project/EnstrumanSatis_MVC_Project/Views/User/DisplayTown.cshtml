@@ -1,0 +1,11 @@
+﻿@model EnstrumanSatis_MVC_Project.Models.Town
+
+<option value="">Seçiniz</option>
+
+@if (ViewBag.Tlist != null)
+{
+    foreach (var item in ViewBag.Tlist)
+    {
+        <option value="@item.Value">@item.Text</option>
+    }
+}

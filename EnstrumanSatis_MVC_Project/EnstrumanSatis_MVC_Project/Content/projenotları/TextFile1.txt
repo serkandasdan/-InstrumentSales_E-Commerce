@@ -1,0 +1,1 @@
+﻿1-glyphicon icon ekleme olmazsa fonts klasöründeki dosyaları fonts klasörüne atıp daha sonra bootstrap.min.css  dosyasına gidip font-face kısmını ekle

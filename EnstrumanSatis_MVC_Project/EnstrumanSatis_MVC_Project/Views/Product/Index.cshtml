@@ -1,0 +1,76 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@using EnstrumanSatis_MVC_Project.Models
+@model List<Product>
+
+
+<div class="women-product">
+    <div class=" w_content">
+        <div class="women">
+            <a href="#"><h4>Enthecwear - <span>4449 itemms</span> </h4></a>
+            <ul class="w_nav">
+                <li>Sort : </li>
+                <li><a class="active" href="#">popular</a></li> |
+                <li><a href="#">new </a></li> |
+                <li><a href="#">discount</a></li> |
+                <li><a href="#">price: Low High </a></li>
+                <div class="clearfix"> </div>
+            </ul>
+            <div class="clearfix"> </div>
+        </div>
+    </div>
+    <br />
+
+
+    <div class="product-left">
+        @foreach (Product prd in Model)
+        {
+
+
+            <div class="col-md-4 chain-grid grid-top-chain" style="margin:10px;">
+                <a href="/Product/ProductDetails/@prd.ID"><img class="img-responsive chain" src="~/Content/Resimler/@prd.Category.CategoryName/@prd.Image1" alt=" " /></a>
+                <div class="grid-chain-bottom">
+                    <h6><a href="/Product/ProductDetails/@prd.ID">@prd.ProductName</a></h6>
+                    <div class="star-price">
+                        <div class="dolor-grid">
+                            <span class="actual text-justify"> @string.Format("{0:C}", @prd.Price) </span>
+
+                        </div>
+                        <a class="now-get get-cart" href="#">Sepete Ekle</a>
+                        <div class="clearfix"> </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var menu_ul = $('.menu > li > ul'),
+                menu_a = $('.menu > li > a');
+            menu_ul.hide();
+            menu_a.click(function (e) {
+                e.preventDefault();
+                if (!$(this).hasClass('active')) {
+                    menu_a.removeClass('active');
+                    menu_ul.filter(':visible').slideUp('normal');
+                    $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                } else {
+                    $(this).removeClass('active');
+                    $(this).next().stop(true, true).slideUp('normal');
+                }
+            });
+
+        });
+    </script>
+
+
+}
+

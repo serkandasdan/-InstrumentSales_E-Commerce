@@ -1,0 +1,198 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Müzik Evreni</title>
+
+
+    <link rel="stylesheet" href="~/Content/css/bootstrap.min.css" />
+
+    <link href="/Content/css/style.css" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="/Content/css/etalage.css" type="text/css" media="all" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+   
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,300&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+    <script src="/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+
+    <script src="~/Content/js/jquery.etalage.min.js"></script>
+    <script src="~/Scripts/jquery.mask.js"></script>
+    
+
+
+
+    @RenderSection("head", false)
+</head>
+<body>
+    <!--header-->
+    <div class="header">
+        <div class="top-header">
+            <div class="container">
+
+                <div class="top-header-left">
+
+                    <ul class="support">
+
+                        <li> <a href="#"><span class="live">İletişim: (0537) 876 03 47</span></a></li>
+                    </ul>
+
+                </div>
+                <div class="top-header-right">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="support">
+
+                            <li> <a href="#"><span class="live">Hoşgeldiniz, @HttpContext.Current.User.Identity.Name.ToString()</span></a></li>
+                        </ul>
+
+                    }
+                </div>
+
+            </div>
+        </div>
+        <div class="bottom-header">
+            <div class="container">
+                <div class="header-bottom-left">
+                    <div class="logo">
+                        <a href="/Content/index.html"><img src="~/Content/images/logo2.gif" alt=" " /></a>
+                    </div>
+                    <form method="post">
+                        <div class="search">
+                            <input type="text" placeholder="Ürün Arama..." value="" name="search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = '';}">
+                            <input type="submit" value="Ara">
+
+                        </div>
+                    </form>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="header-bottom-right">
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="account"><a href="/User/MyAccount"><span> </span>Hesabım</a></div>
+
+
+
+                    }
+                    else
+                    {
+                        <ul class="login">
+                            <li><a href="/User/Login"><span> </span>Giriş Yap</a></li> |
+                            <li><a href="/User/Registration">Kayıt Ol</a></li>
+                        </ul>
+                    }
+
+
+                    <div class="cart"><a href="/Content/Cart"><span> </span>Sepet</a></div>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <ul class="login">
+
+                            <li><a href="/User/Logout"><span> </span>Çıkış Yap</a></li>
+                        </ul>
+                    }
+                    <div class="clearfix"> </div>
+
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!---->
+    <div class="container">
+        <div class="sub-cate">
+            <div class=" top-nav rsidebar span_1_of_left">
+                <h3 class="cate">KATEGORİLER</h3>
+                <ul class="menu">
+
+                    <ul class="kid-menu ">
+
+                        @Html.Action("Category", "Category")
+
+                    </ul>
+                </ul>
+            </div>
+            <!--initiate accordion-->
+            <script type="text/javascript">
+                $(function () {
+                    var menu_ul = $('.menu > li > ul'),
+                        menu_a = $('.menu > li > a');
+                    menu_ul.hide();
+                    menu_a.click(function (e) {
+                        e.preventDefault();
+                        if (!$(this).hasClass('active')) {
+                            menu_a.removeClass('active');
+                            menu_ul.filter(':visible').slideUp('normal');
+                            $(this).addClass('active').next().stop(true, true).slideDown('normal');
+                        } else {
+                            $(this).removeClass('active');
+                            $(this).next().stop(true, true).slideUp('normal');
+                        }
+                    });
+
+                });
+            </script>
+
+            <br />
+        </div>
+        @RenderBody()
+
+
+    </div>
+    <div style="background-color:beige" class="footer">
+
+        <div class="footer-bottom">
+            <div class="container">
+                <div class="footer-bottom-cate">
+                    <h6>Kategoriler</h6>
+                    <ul>
+                        @Html.Action("Category", "Category")
+                    </ul>
+                </div>
+
+                <div class="footer-bottom-cate">
+
+                    <ul class="face-in-to">
+                        <li><a href="#"><span></span></a></li>
+                        <li><a href="#"><span class="facebook-in"> </span></a></li>
+
+                    </ul>
+                </div>
+
+
+
+
+                <div class="footer-bottom-cate cate-bottom">
+                    <h6>Adresimiz</h6>
+                    <ul>
+                        <li><a href="#">muzikevreni.com </a></li>
+                        <li>İMÇ A. Blok No: 5560 Barbaros Bulvarı 34134 Beşiktaş İstanbul</li>
+
+                        <li class="phone">
+                            Tel: +90 212 621 1846
+                        </li>
+                        <li class="phone">
+                            Faks: +90 212 621 1889
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

@@ -1,0 +1,7 @@
+﻿
+@using EnstrumanSatis_MVC_Project.Models
+@model List<Category>
+@foreach (Category category in Model)
+{
+    <li><a href="/Product/Index/@category.CategoryID">@category.CategoryName</a></li>
+}
