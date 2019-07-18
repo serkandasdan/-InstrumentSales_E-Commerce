@@ -245,9 +245,9 @@ namespace EnstrumanSatis_MVC_Project.Controllers
             var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
 
 
-            var fromEmail = new MailAddress("wissenproje@gmail.com", "Wissen Proje");
+            var fromEmail = new MailAddress("***************************", "Wissen Proje");
             var toEmail = new MailAddress(Email);
-            var fromEmailPassword = "135531135";
+            var fromEmailPassword = "*********";
             string subject = "Hesabınız başarıyla oluşturuldu.";
 
 
